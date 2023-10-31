@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        GCP_PROJECT_ID = 'poshan-403704'
+        GCP_PROJECT_ID2 = 'poshan-403704'
         APP_IMAGE_NAME = 'express-app'
         GAR_REGION = 'asia-south1' // Define the region for Artifact Registry
         GKE_CLUSTER_NAME = 'poshanclu'
@@ -34,7 +34,7 @@ pipeline {
                 }
                 script {
                     sh "gcloud auth activate-service-account --key-file=cred.json"
-                    sh "docker tag express-app:latest ${GAR_REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/poshan/${APP_IMAGE_NAME}:${env.BUILD_ID}"
+                    sh "docker tag express-app:latest ${GAR_REGION}-docker.pkg.dev/${GCP_PROJECT_ID2}/poshan/${APP_IMAGE_NAME}:${env.BUILD_ID}"
                     sh "gcloud auth configure-docker ${GAR_REGION}-docker.pkg.dev"
                     sh "docker push ${GAR_REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/poshan/${APP_IMAGE_NAME}:${env.BUILD_ID}"
                 }
@@ -45,7 +45,7 @@ pipeline {
             steps {
                 script {
                     // Authenticate to GKE cluster
-                    gcloud(project: GCP_PROJECT_ID, credentialsId: 'poshan', clusterName: GKE_CLUSTER_NAME, zone: 'asia-south1')
+                    gcloud(project: GCP_PROJECT_ID2, credentialsId: 'poshan', clusterName: GKE_CLUSTER_NAME, zone: 'asia-south1')
                     // Set the Kubectl context to your GKE cluster
                     sh "gcloud container clusters get-credentials ${GKE_CLUSTER_NAME} --zone asia-south1"
 

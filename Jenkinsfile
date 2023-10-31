@@ -45,10 +45,7 @@ pipeline {
             steps {
                 script {
                     // Authenticate to GKE cluster
-                    echo "Environment Variables: ${System.getenv()}"
                     gcloud(project: GCP_PROJECT_ID, credentialsId: 'poshan', clusterName: GKE_CLUSTER_NAME, zone: 'asia-south1')
-                    echo "Current User: ${System.getProperty('user.name')}"
-                    echo "Environment Variables: ${System.getenv()}"
                     // Set the Kubectl context to your GKE cluster
                     sh "gcloud container clusters get-credentials ${GKE_CLUSTER_NAME} --zone asia-south1"
 

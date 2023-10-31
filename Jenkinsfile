@@ -45,6 +45,7 @@ pipeline {
             steps {
                 script {
                     // Authenticate to GKE cluster
+                    gcloud config set project ${GCP_PROJECT_ID2}
                     gcloud(project: GCP_PROJECT_ID2, credentialsId: 'poshan', clusterName: GKE_CLUSTER_NAME, zone: 'asia-south1')
                     // Set the Kubectl context to your GKE cluster
                     sh "gcloud container clusters get-credentials ${GKE_CLUSTER_NAME} --zone asia-south1"

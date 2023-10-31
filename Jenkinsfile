@@ -48,7 +48,7 @@ pipeline {
                     gcloud(project: GCP_PROJECT_ID, credentialsId: 'poshan', clusterName: GKE_CLUSTER_NAME, zone: 'asia-south1')
 
                     // Set the Kubectl context to your GKE cluster
-                    sh "gcloud container clusters get-credentials ${GKE_CLUSTER_NAME} --zone us-east1-b"
+                    sh "gcloud container clusters get-credentials ${GKE_CLUSTER_NAME} --zone asia-south1"
 
                     sh "sed -i 's/tagversion/${env.BUILD_ID}/g' deployment.yaml"
 

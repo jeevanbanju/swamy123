@@ -2,10 +2,10 @@ pipeline {
     agent any
 
     environment {
-        GCP_PROJECT_ID = 'bold-catfish-402405'
+        GCP_PROJECT_ID = 'poshan-403704'
         APP_IMAGE_NAME = 'express-app'
-        GAR_REGION = 'us-east1' // Define the region for Artifact Registry
-        GKE_CLUSTER_NAME = 'jenkins-poc'
+        GAR_REGION = 'asia-south1' // Define the region for Artifact Registry
+        GKE_CLUSTER_NAME = 'poshanclu'
         K8S_NAMESPACE = 'default'
     }
 
@@ -27,7 +27,7 @@ pipeline {
 
         stage("Push Image to Artifact Registry") {
             steps {
-                withCredentials([file(credentialsId: "bold-catfish-402405", variable: 'GC_KEY')]) {
+                withCredentials([file(credentialsId: "poshan-403704", variable: 'GC_KEY')]) {
                     sh "cp ${env:GC_KEY} cred.json"
                 }
                 script {
@@ -43,7 +43,7 @@ pipeline {
             steps {
                 script {
                     // Authenticate to GKE cluster
-                    gcloud(project: GCP_PROJECT_ID, credentialsId: 'bold-catfish-402405', clusterName: GKE_CLUSTER_NAME, zone: 'us-east1-b')
+                    gcloud(project: GCP_PROJECT_ID, credentialsId: 'poshan-403704', clusterName: GKE_CLUSTER_NAME, zone: 'asia-south1')
 
                     // Set the Kubectl context to your GKE cluster
                     sh "gcloud container clusters get-credentials ${GKE_CLUSTER_NAME} --zone us-east1-b"

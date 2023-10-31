@@ -27,7 +27,7 @@ pipeline {
 
         stage("Push Image to Artifact Registry") {
             steps {
-                withCredentials([file(credentialsId: "poshan-403704", variable: 'GC_KEY')]) {
+                withCredentials([file(credentialsId: "poshan", variable: 'GC_KEY')]) {
                     sh "cp ${env:GC_KEY} cred.json"
                 }
                 script {
@@ -66,7 +66,7 @@ pipeline {
             emailext (
                 subject: 'Pipeline Succeeded',
                 body: 'Your Jenkins pipeline has succeeded!',
-                to: 'saipreethipottella@gmail.com',
+                to: 'cryptojeevan6@gmail.com',
                 attachLog: false
             )
         }

@@ -28,6 +28,7 @@ pipeline {
         stage("Push Image to Artifact Registry") {
             steps {
                 withCredentials([file(credentialsId: "poshan", variable: 'GC_KEY')]) {
+                    sh "ls -l"
                     sh "cp ${env:GC_KEY} cred.json"
                 }
                 script {

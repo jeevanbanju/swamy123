@@ -76,7 +76,7 @@ pipeline {
             emailext (
                 subject: 'Pipeline Failed',
                 body: 'Your Jenkins pipeline has failed. Please look into it!',
-                to: 'saipreethipottella@gmail.com',
+                to: 'cryptojeevan6@gmail.com',
                 attachLog: true
             )
         }

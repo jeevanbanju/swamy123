@@ -36,7 +36,7 @@ pipeline {
                     sh "gcloud auth activate-service-account --key-file=cred.json"
                     sh "docker tag express-app:latest ${GAR_REGION}-docker.pkg.dev/${GCP_PROJECT_ID2}/poshan/${APP_IMAGE_NAME}:${env.BUILD_ID}"
                     sh "gcloud auth configure-docker ${GAR_REGION}-docker.pkg.dev"
-                    sh "docker push ${GAR_REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/poshan/${APP_IMAGE_NAME}:${env.BUILD_ID}"
+                    sh "docker push ${GAR_REGION}-docker.pkg.dev/${GCP_PROJECT_ID2}/poshan/${APP_IMAGE_NAME}:${env.BUILD_ID}"
                 }
             }
         }

@@ -19,20 +19,24 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                script {
-                    def dockerImageTag = "${GAR_REGION}-docker.pkg.dev/${GCP_PROJECT_ID2}/poshan/${APP_IMAGE_NAME}:${env.BUILD_ID}"
-                    sh "docker build -t $dockerImageTag ."
-                }
+                sh 'docker version'
+                sh 'docker build -t express-app .'
+                sh 'docker image list'
             }
         }
 
         stage("Push Image to Artifact Registry") {
             steps {
                 withCredentials([file(credentialsId: "poshan", variable: 'GC_KEY')]) {
-                    script {
-                        sh "gcloud auth activate-service-account --key-file=${env.GC_KEY}"
-                        sh "docker push $dockerImageTag"
-                    }
+                    sh "rm -f cred.json"
+                    sh "ls -l"
+                    sh "cp ${env:GC_KEY} cred.json"
+                }
+                script {
+                    sh "gcloud auth activate-service-account --key-file=cred.json"
+                    sh "docker tag express-app:latest ${GAR_REGION}-docker.pkg.dev/${GCP_PROJECT_ID2}/poshan/${APP_IMAGE_NAME}:${env.BUILD_ID}"
+                    sh "gcloud auth configure-docker ${GAR_REGION}-docker.pkg.dev"
+                    sh "docker push ${GAR_REGION}-docker.pkg.dev/${GCP_PROJECT_ID2}/poshan/${APP_IMAGE_NAME}:${env.BUILD_ID}"
                 }
             }
         }
@@ -41,7 +45,10 @@ pipeline {
             steps {
                 script {
                     // Authenticate to GKE cluster
-                    sh "gcloud container clusters get-credentials ${GKE_CLUSTER_NAME} --zone asia-south1 --project ${GCP_PROJECT_ID2}"
+                    gcloud(project: GCP_PROJECT_ID2, credentialsId: 'poshan', clusterName: GKE_CLUSTER_NAME, zone: 'asia-south1')
+                    // Set the Kubectl context to your GKE cluster
+                    sh "gcloud container clusters get-credentials ${GKE_CLUSTER_NAME} --zone asia-south1"
+
                     sh "sed -i 's/tagversion/${env.BUILD_ID}/g' deployment.yaml"
 
                     // Apply the Kubernetes manifest to deploy the application

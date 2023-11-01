@@ -8,7 +8,7 @@ let bookData = {"1": "eat that frog", "2": "rich dad poor dad"};
 
 app.use(bodyParser.json());
 app.get('/',(req,res)=>{
-    res.send("Welcome to Poshan");
+    res.send("Welcome to **Mohan**");
 })
 
 app.get('/bookById',(req,res)=>{

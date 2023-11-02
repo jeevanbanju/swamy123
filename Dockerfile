@@ -8,9 +8,8 @@ RUN apt-get update && apt-get install -y git
 # Switch back to the Jenkins user
 USER jenkins
 
-# Install Jenkins plugins using the "install-plugins.sh" script
-COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
-RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
+# Install Jenkins plugins using the "jenkins-plugin-cli"
+RUN jenkins-plugin-cli --plugins < /usr/share/jenkins/ref/plugins.txt
 
 # Copy custom configuration files to the Jenkins home directory (uncomment these lines if needed)
 # COPY custom-config.xml /var/jenkins_home

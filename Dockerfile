@@ -20,6 +20,8 @@ COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 
 RUN chmod -R  755 /var/jenkins_home
 RUN chown -R jenkins:jenkins /var/jenkins_home
+RUN chown -R 1000:1000 /var/jenkins_home
+
 
 # Example: Set environment variables to customize Jenkins
 ENV JENKINS_HOME /var/jenkins_home

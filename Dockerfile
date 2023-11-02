@@ -18,6 +18,9 @@ COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 # COPY custom-config.xml /var/jenkins_home
 # COPY custom-script.groovy /var/jenkins_home/init.groovy.d/
 
+RUN RUN chmod -R  755 /var/jenkins_home
+
 # Example: Set environment variables to customize Jenkins
 ENV JENKINS_HOME /var/jenkins_home
+
 

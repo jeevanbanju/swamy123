@@ -1,20 +1,38 @@
-apiVersion: "apps/v1"
-kind: "Deployment"
+apiVersion: apps/v1
+kind: StatefulSet
 metadata:
-  name: "sample"
-  namespace: "default"
-  labels:
-    app: "express"
+  name: jenkins-statefulset
 spec:
-  replicas: 2
+  serviceName: "jenkins-headless-service"
+  replicas: 3  # Number of Jenkins instances
   selector:
     matchLabels:
-      app: "express"
+      app: jenkins
   template:
     metadata:
       labels:
-        app: "express"
+        app: jenkins
     spec:
       containers:
-      - name: "express-app-sha256-1"
+      - name: jenkins-container
         image: "asia-south1-docker.pkg.dev/poshan-403704/poshan/express-app:tagversion"
+        ports:
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 8443
+        - name: udp-port
+          containerPort: 54321
+        # Add any additional configuration or environment variables here
+        volumeMounts:
+        - name: jenkins-data
+          mountPath: /var/jenkins_home  # Mount a persistent volume for Jenkins data
+  volumeClaimTemplates:
+  - metadata:
+      name: jenkins-data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: "standard"  # Use an appropriate storage class
+      resources:
+        requests:
+          storage: 10Gi  # Specify the desired storage size

@@ -1,16 +1,18 @@
-apiVersion: "v1"
-kind: "Service"
+apiVersion: v1
+kind: Service
 metadata:
-  name: "sample-service"
-  namespace: "default"
-  labels:
-    app: "sample"
+  name: jenkins-headless-service
 spec:
-  ports:
-  - protocol: "TCP"
-    port: 8080
-    targetPort: 8080
   selector:
-    app: "express"
-  type: "LoadBalancer"
-  loadBalancerIP: ""
+    app: jenkins
+  clusterIP: None
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+    - name: https
+      protocol: TCP
+      port: 443
+    - name: udp-port
+      protocol: UDP
+      port: 12345

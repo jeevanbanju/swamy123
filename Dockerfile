@@ -8,8 +8,11 @@ RUN apt-get update && apt-get install -y git
 # Switch back to the Jenkins user
 USER jenkins
 
+# Copy plugins.txt into the image
+COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
+
 # Install Jenkins plugins using the "jenkins-plugin-cli"
-RUN jenkins-plugin-cli --plugins < /usr/share/jenkins/ref/plugins.txt
+RUN jenkins-plugin-cli --plugins /usr/share/jenkins/ref/plugins.txt
 
 # Copy custom configuration files to the Jenkins home directory (uncomment these lines if needed)
 # COPY custom-config.xml /var/jenkins_home
@@ -17,3 +20,4 @@ RUN jenkins-plugin-cli --plugins < /usr/share/jenkins/ref/plugins.txt
 
 # Example: Set environment variables to customize Jenkins
 ENV JENKINS_HOME /var/jenkins_home
+

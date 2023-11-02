@@ -21,5 +21,6 @@ spec:
       port: 12345
       targetPort: 54321
       nodePort: 31234  # Specify a node port, or let Kubernetes allocate one
+  type: "NodePort"
 
 

@@ -24,9 +24,9 @@ spec:
         - name: udp-port
           containerPort: 54321
         securityContext:
-          runAsUser: 1000  # Jenkins user ID
-          runAsGroup: 1000  # Jenkins group ID
-        # ... other container configuration
+          runAsUser: 1000  
+          runAsGroup: 1000 
+          fsGroup: 1000
         volumeMounts:
         - name: jenkins-data
           mountPath: /var/jenkins_home

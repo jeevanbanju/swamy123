@@ -18,4 +18,4 @@ RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 # COPY custom-script.groovy /var/jenkins_home/init.groovy.d/
 
 # Example: Set environment variables to customize Jenkins
-ENV JENKINS_HOME /var/jenkins_ho
+ENV JENKINS_HOME /var/jenkins_home

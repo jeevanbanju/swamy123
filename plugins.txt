@@ -1,6 +1,2 @@
 docker
-workflow-aggregator
 git
-ssh-slaves
-matrix-auth
-pipeline-github

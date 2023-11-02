@@ -5,14 +5,17 @@ metadata:
 spec:
   selector:
     app: jenkins
-  clusterIP: None
   ports:
     - name: http
       protocol: TCP
       port: 80
+      targetPort: 8080
     - name: https
       protocol: TCP
       port: 443
+      targetPort: 8443
     - name: udp-port
       protocol: UDP
       port: 12345
+      targetPort: 54321
+  type: LoadBalancer

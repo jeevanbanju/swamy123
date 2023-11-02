@@ -1,19 +1,21 @@
-FROM node:18
+# Use an official Jenkins image as the base
+FROM jenkins/jenkins:lts
 
-# Create app directory
-WORKDIR /usr/src/app
+# Install any additional system packages or dependencies
+USER root
+RUN apt-get update && apt-get install -y \
+    
+USER jenkins
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
+# Install Jenkins plugins using the "install-plugins.sh" script
+COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
+RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
+# Copy custom configuration files to the Jenkins home directory
+# COPY custom-config.xml /var/jenkins_home
 
-# Bundle app source
-COPY . .
+# Add any additional custom scripts or files as needed
+# COPY custom-script.groovy /var/jenkins_home/init.groovy.d/
 
-EXPOSE 5000
-CMD [ "node", "index.js" ]
+# Example: Set environment variables to customize Jenkins
+ENV JENKINS_HOME /var/jenkins_ho

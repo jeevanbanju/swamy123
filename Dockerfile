@@ -1,5 +1,5 @@
 # Use an official Jenkins image as the base
-FROM jenkins/jenkins:lts
+FROM jenkins/jenkins:jdk11
 
 # Install any additional system packages or dependencies
 USER root

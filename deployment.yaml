@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: jenkins-statefulset
 spec:
-  serviceName: "jenkins-external-service"
+  serviceName: "jenkins-nodeport-service"
   replicas: 2
   selector:
     matchLabels:

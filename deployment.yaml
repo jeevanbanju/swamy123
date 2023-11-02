@@ -4,7 +4,7 @@ metadata:
   name: jenkins-statefulset
 spec:
   serviceName: "jenkins-headless-service"
-  replicas: 3  # Number of Jenkins instances
+  replicas: 2
   selector:
     matchLabels:
       app: jenkins
@@ -23,16 +23,19 @@ spec:
           containerPort: 8443
         - name: udp-port
           containerPort: 54321
-        # Add any additional configuration or environment variables here
+        securityContext:
+          runAsUser: 1000  # Jenkins user ID
+          runAsGroup: 1000  # Jenkins group ID
+        # ... other container configuration
         volumeMounts:
         - name: jenkins-data
-          mountPath: /var/jenkins_home  # Mount a persistent volume for Jenkins data
+          mountPath: /var/jenkins_home
   volumeClaimTemplates:
   - metadata:
       name: jenkins-data
     spec:
       accessModes: ["ReadWriteOnce"]
-      storageClassName: "standard"  # Use an appropriate storage class
+      storageClassName: "standard"
       resources:
         requests:
-          storage: 10Gi  # Specify the desired storage size
+          storage: 10Gi

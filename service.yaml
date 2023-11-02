@@ -19,3 +19,4 @@ spec:
       port: 12345
       targetPort: 54321
   type: LoadBalancer
+

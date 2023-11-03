@@ -4,7 +4,7 @@ metadata:
   name: jenkins-statefulset
 spec:
   serviceName: "jenkins-loadbalancer-service"
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: jenkins
@@ -15,12 +15,11 @@ spec:
     spec:
       initContainers:
       - name: init-chown
-        image: alpine  # Use a lightweight image with chown available
+        image: alpine
         command: ["sh", "-c", "chown -R 1000:1000 /var/jenkins_home"]
         volumeMounts:
         - name: jenkins-data
           mountPath: /var/jenkins_home
-
       containers:
       - name: jenkins-container
         image: "asia-south1-docker.pkg.dev/poshan-403704/poshan/express-app:tagversion"
@@ -29,8 +28,6 @@ spec:
           containerPort: 8080
         - name: https
           containerPort: 8443
-        - name: udp-port
-          containerPort: 54321
         securityContext:
           runAsUser: 1000
           runAsGroup: 1000
@@ -38,12 +35,4 @@ spec:
         - name: jenkins-data
           mountPath: /var/jenkins_home
 
-  volumeClaimTemplates:
-  - metadata:
-      name: jenkins-data
-    spec:
-      accessModes: ["ReadWriteOnce"]
-      storageClassName: "standard"
-      resources:
-        requests:
-          storage: 10Gi
+  volumeClaimTemplates: []  

@@ -49,10 +49,11 @@ pipeline {
                     // Set the Kubectl context to your GKE cluster
                     sh "gcloud container clusters get-credentials ${GKE_CLUSTER_NAME} --zone asia-south1 --project ${GCP_PROJECT_ID2}"
 
-                    sh "sed -i 's/tagversion/${env.BUILD_ID}/g' deployment.yaml"
+                    sh "sed -i 's/tagversion/${env.BUILD_ID}/g' Statefulset.yaml"
 
                     // Apply the Kubernetes manifest to deploy the application
-                    sh "kubectl apply -f deployment.yaml -n ${K8S_NAMESPACE}"
+                    sh "kubectl apply -f PVC.yaml -n ${K8S_NAMESPACE}"
+                    sh "kubectl apply -f Statefulset.yaml -n ${K8S_NAMESPACE}"
                     sh "kubectl apply -f service.yaml -n ${K8S_NAMESPACE}"
                     cleanWs()
                 }

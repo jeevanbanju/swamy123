@@ -15,7 +15,7 @@ spec:
     spec:
       initContainers:
       - name: init-chown
-        image: alpine
+        image: alpine  # Use a lightweight image with chown available
         command: ["sh", "-c", "chown -R 1000:1000 /var/jenkins_home"]
         volumeMounts:
         - name: jenkins-data
@@ -28,6 +28,8 @@ spec:
           containerPort: 8080
         - name: https
           containerPort: 8443
+        - name: udp-port
+          containerPort: 54321
         securityContext:
           runAsUser: 1000
           runAsGroup: 1000

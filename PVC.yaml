@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: jenkins-data
+  name: shared-pvc
 spec:
   accessModes:
-    - ReadWriteOnce
-  storageClassName: "standard"
+    - ReadWriteOnce  # Adjust the access mode as needed
+  storageClassName: standard  # Set the appropriate storage class
   resources:
     requests:
-      storage: 10Gi
+      storage: 10Gi  # Set the desired storage size

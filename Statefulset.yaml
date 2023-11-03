@@ -38,14 +38,9 @@ spec:
         - name: jenkins-data
           mountPath: /var/jenkins_home
 
-  volumeClaimTemplates:
-  - metadata:
-      name: jenkins-data
-    spec:
-      dataSource:
-        name: shared-pvc  
-      accessModes: ["ReadWriteOnce"]
-      storageClassName: "standard"
-      resources:
-        requests:
-          storage: 10Gi
+  volumeClaimTemplates: []
+
+  volumes:
+  - name: jenkins-data
+    persistentVolumeClaim:
+      claimName: shared-data-pvc

@@ -1,11 +1,13 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: shared-pvc
+  name: shared-data-pvc
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "standard" # Adjust the storage class as needed
 spec:
   accessModes:
-    - ReadWriteOnce  # Adjust the access mode as needed
-  storageClassName: standard  # Set the appropriate storage class
+    - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi  # Set the desired storage size
+      storage: 10Gi # Adjust the storage size as needed
+

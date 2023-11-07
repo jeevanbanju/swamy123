@@ -7,7 +7,7 @@ spec:
     app: jenkins
   ports:
     - name: http
-      protocol: TCP
+      protocol: http
       port: 80
       targetPort: 8080
   type: LoadBalancer

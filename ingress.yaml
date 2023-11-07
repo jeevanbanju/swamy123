@@ -11,6 +11,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: jenkins-loadbalancer-service
+                name: http://jenkins.mohankumar.tech/
                 port:
                   number: 80

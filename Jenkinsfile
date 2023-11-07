@@ -6,7 +6,7 @@ pipeline {
         APP_IMAGE_NAME = 'express-app'
         GAR_REGION = 'asia-south1' // Define the region for Artifact Registry
         GKE_CLUSTER_NAME = 'poshanclu'
-        K8S_NAMESPACE = 'default'
+        K8S_NAMESPACE = 'jenkins'
     }
 
     stages {

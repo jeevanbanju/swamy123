@@ -4,13 +4,13 @@ metadata:
   name: jenkins-ingress
 spec:
   rules:
-    - host: jenkins.mohankumar.tech
+    - host: https://jenkins.mohankumar.tech/
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: http://jenkins.mohankumar.tech/
+                name: jenkins-loadbalancer-service
                 port:
                   number: 80

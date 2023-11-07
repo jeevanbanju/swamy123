@@ -55,6 +55,7 @@ pipeline {
                     sh "kubectl apply -f PVC.yaml -n ${K8S_NAMESPACE}"
                     sh "kubectl apply -f Statefulset.yaml -n ${K8S_NAMESPACE}"
                     sh "kubectl apply -f service.yaml -n ${K8S_NAMESPACE}"
+                    sh "kubectl apply -f ingress.yaml -n ${K8S_NAMESPACE}"
                     cleanWs()
                 }
             }

@@ -1,5 +1,5 @@
 # Use an official Jenkins image as the base
-FROM jenkins/jenkins:jdk11
+FROM jenkins/jenkins:lts
 
 
 

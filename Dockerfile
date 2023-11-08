@@ -1,8 +1,6 @@
 # Use an official Jenkins image as the base
 FROM jenkins/jenkins:lts
 
-
-
 USER root
 RUN chmod -R 755 /var
 RUN chown -R jenkins:jenkins /var/jenkins_home

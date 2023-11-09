@@ -4,7 +4,7 @@ metadata:
   name: jenkins-statefulset
 spec:
   serviceName: "jenkins-loadbalancer-service"
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: jenkins

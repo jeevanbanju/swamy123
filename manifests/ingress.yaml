@@ -4,7 +4,7 @@ metadata:
   name: jenkins-ingress
 spec:
   rules:
-    - host: jenkins.mohankumar.tech
+    - host: mohankumar.tech
       http:
         paths:
           - path: /

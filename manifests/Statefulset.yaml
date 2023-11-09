@@ -23,7 +23,7 @@ spec:
 
       containers:
       - name: jenkins-container
-        image: "asia-south1-docker.pkg.dev/poshan-403704/poshan/express-app:lts"
+        image: "asia-south1-docker.pkg.dev/poshan-403704/poshan/express-app:120"
         ports:
         - name: http
           containerPort: 8080

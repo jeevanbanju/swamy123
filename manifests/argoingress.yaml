@@ -4,7 +4,7 @@ metadata:
   name: argo-ingress
 spec:
   rules:
-    - host: argocd.mohankumar.tech
+    - host: argocd.jbgroup.tech
       http:
         paths:
           - path: /

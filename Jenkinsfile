@@ -4,7 +4,7 @@ pipeline {
     environment {
         GCP_PROJECT_ID2 = 'poshan-403704'
         APP_IMAGE_NAME = 'express-app'
-        GAR_REGION = 'asia-south1-a' // Define the region for Artifact Registry
+        GAR_REGION = 'asia-south1' // Define the region for Artifact Registry
         GKE_CLUSTER_NAME = 'ravi123'
         K8S_NAMESPACE = 'jenkins'
     }
